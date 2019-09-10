@@ -39,7 +39,7 @@ def demux(ts_file_name, output_dir, log_file):
 
   xml_file.close()
   
-  if channel_name in ["9Life", "Channel 9 Melbourne"]:
+  if channel_name in ["9Life", "Channel 9 Melbourne", "9Go!", "9Gem"]:
     demux_with_projectx(ts_file_name, output_dir, log_file)
   else:
     demux_with_tsdoctor(ts_file_name, output_dir, log_file)
