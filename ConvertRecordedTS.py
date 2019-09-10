@@ -2,6 +2,7 @@ import sys
 import os
 import datetime
 import glob
+import TestFile
 import MergeToMKV
 import Demux
 
@@ -12,11 +13,19 @@ failed_dir = "E:\\PVR\\TS\\Failed"
 
 def convert_recorded_ts(ts_file_path, log_file_path):
 
+  # Stop if file is still being written
+  if TestFile.file_in_use(ts_file_path):
+    return
+	
   ts_file_name = os.path.basename(ts_file_path)
 
   log_file = open(log_file_path, "a+")
   log_file.write(str(datetime.datetime.now()) + " - START conversion of " + ts_file_name + "\n")
+  
+  # Demux file into video, audio and subtitle streams
   Demux.demux(ts_file_path, convert_dir, log_file)
+  
+  # Mux into Matroska file format
   output_file_path = output_dir + "\\" + os.path.splitext(ts_file_name)[0] + ".mkv"
   return_code = MergeToMKV.mux(output_file_path, convert_dir, log_file)
 
