@@ -2,12 +2,12 @@ import sys
 
 # Return True if file is in use
 def file_in_use(path):
-    try:
-        test_file = open(path, "a")
-        test_file.close()
-        return False
-    except IOError:
-        return True
+  try:
+    test_file = open(path, "a")
+    test_file.close()
+    return False
+  except IOError:
+    return True
 	    
 
 if __name__ == "__main__":
