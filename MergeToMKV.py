@@ -46,12 +46,12 @@ def mux(output_file_path, convert_dir, log_file):
   if subtitle_file:
     log_file.write("\"{0}\" -o \"{1}\" \"{2}\" \"{3}\" \"{4}\"\n"
 	               .format(mkvmerge_command, output_file_path, video_file, audio_file, subtitle_file))
-    return_code = subprocess.call(["C:\Program Files\MKVtoolnix\mkvmerge.exe", "-o", output_file_path, 
+    return_code = subprocess.call([mkvmerge_command, "-o", output_file_path, 
 					               video_file, audio_file, subtitle_file])
   else:
     log_file.write("\"{0}\" -o \"{1}\" \"{2}\" \"{3}\"\n"
 	               .format(mkvmerge_command, output_file_path, video_file, audio_file))
-    return_code = subprocess.call(["C:\Program Files\MKVtoolnix\mkvmerge.exe", "-o", output_file_path, 
+    return_code = subprocess.call([mkvmerge_command, "-o", output_file_path, 
 					               video_file, audio_file])
 
   log_file.write(str(datetime.datetime.now()) + " - COMPLETED merge of " + show_name + "\n")
