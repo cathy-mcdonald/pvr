@@ -28,17 +28,21 @@ def demux_with_tsdoctor(ts_file_name, output_dir, log_file):
 
 				   
 def demux(ts_file_name, output_dir, log_file):
-  xml_file = open(os.path.splitext(ts_file_name)[0] + ".xml", "r")
+  channel_name = ""
   
-  log_file.write(str(datetime.datetime.now()) + " - START demux of " + os.path.basename(ts_file_name) + "\n")
+  try:
+    xml_file = open(os.path.splitext(ts_file_name)[0] + ".xml", "r")
+    log_file.write(str(datetime.datetime.now()) + " - START demux of " + os.path.basename(ts_file_name) + "\n")
 
-  pattern = re.compile("<name>CHANNEL_NAME</name>\s+<value>(.+)</")
-  matches = re.findall(pattern, xml_file.read())
-  channel_name = matches[0]
-  log_file.write("Channel name: {0}\n".format(channel_name))
+    pattern = re.compile("<name>CHANNEL_NAME</name>\s+<value>(.+)</")
+    matches = re.findall(pattern, xml_file.read())
+    channel_name = matches[0]
+    log_file.write("Channel name: {0}\n".format(channel_name))
 
-  xml_file.close()
-  
+    xml_file.close()
+  except IOError:
+    log_file.write("No xml file found")
+
   if channel_name in ["9Life", "Channel 9 Melbourne", "9Go!", "9Gem"]:
     demux_with_projectx(ts_file_name, output_dir, log_file)
   else:

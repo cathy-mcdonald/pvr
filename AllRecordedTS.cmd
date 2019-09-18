@@ -11,5 +11,4 @@ REM temp directory
 mkdir "\PVR\convert"
 
 del /q C:\ProgramData\Cypheros\TsDoctor2\Temp\*
-cd "\PVR\TS"
-for %%i in (*.ts) do call python "\PVR\scripts\ConvertRecordedTS.py" "%%i"
+call python "\PVR\scripts\AllRecordedTS.py" "E:\PVR"
