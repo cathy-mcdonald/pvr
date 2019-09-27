@@ -43,7 +43,7 @@ def demux(ts_file_name, output_dir, log_file):
   except IOError:
     log_file.write("No xml file found")
 
-  if channel_name in ["9Life", "Channel 9 Melbourne", "9Go!", "9Gem"]:
+  if channel_name in ["9Life", "Channel 9 Melbourne", "9Go!", "9Gem", "7 Digital"]:
     demux_with_projectx(ts_file_name, output_dir, log_file)
   else:
     demux_with_tsdoctor(ts_file_name, output_dir, log_file)
